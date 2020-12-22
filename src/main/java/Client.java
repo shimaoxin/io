@@ -14,7 +14,6 @@ public class Client {
         OutputStreamWriter osw = new OutputStreamWriter(socket.getOutputStream());
         osw.write("我是客户端1");
         osw.flush();
-        Thread.sleep(10000);
         osw.write("\n你好！");
         osw.flush();
         osw.close();
