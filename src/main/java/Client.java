@@ -14,14 +14,19 @@ public class Client {
         OutputStreamWriter osw = new OutputStreamWriter(socket.getOutputStream());
         osw.write("我是客户端1");
         osw.flush();
-        osw.write("\n你好！");
-        osw.flush();
-        osw.close();
+
 
         Socket socket2 = new Socket("localhost",8080);
         OutputStreamWriter osw2 = new OutputStreamWriter(socket2.getOutputStream());
+
+        osw.write("\n你好！");
+        osw.flush();
+
         osw2.write("我是客户端2");
         osw2.flush();
+
+        osw.close();
+
         osw2.write("\n你好吗？");
         osw2.flush();
         osw2.close();

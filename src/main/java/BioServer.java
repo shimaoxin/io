@@ -6,8 +6,8 @@ import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 
 /**
- * Description
- *
+ * 同步阻塞io，一个连接一个线程
+ * 缺陷：如果连接量很大，线程就会很多，cpu会在切换线程花费大量的时间
  * @author smx
  * @date 2020/12/2020/12/22
  */
@@ -28,7 +28,7 @@ public class BioServer {
             System.out.println("有客户端连接: " + socket.getRemoteSocketAddress());
             new Thread(() -> {
                 while (true) {
-                    byte[] buf = new byte[100];
+                    byte[] buf = new byte[1024];
                     try {
                         //如果客户端没有发消息来，会阻塞等待消息，调用内核recvfrom()
                         socket.getInputStream().read(buf);
@@ -36,6 +36,7 @@ public class BioServer {
                         if(content.trim().length() > 0) {
                             System.out.println(content);
                         } else {
+                            socket.close();
                             System.out.println("客户端连接断开: " + socket.getRemoteSocketAddress());
                             break;
                         }
