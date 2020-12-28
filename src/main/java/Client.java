@@ -12,7 +12,7 @@ public class Client {
     public static void main(String[] args) throws IOException, InterruptedException {
         Socket socket = new Socket("localhost",8080);
         OutputStreamWriter osw = new OutputStreamWriter(socket.getOutputStream());
-        osw.write("我是客户端1");
+        osw.write("\n我是客户端1");
         osw.flush();
 
 
